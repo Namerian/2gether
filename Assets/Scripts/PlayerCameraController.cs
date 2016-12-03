@@ -42,7 +42,7 @@ public class PlayerCameraController : MonoBehaviour
 	{
 		//**************************************************************
 		//Movement
-		float movement = Input.GetAxis ("Controller_2_Y_Axis");
+		float movement = Input.GetAxis ("Controller_2_X_Axis");
 		m_transitionValue += movement * Time.deltaTime;
 
 		if (!m_isTransitionning) {
@@ -53,10 +53,10 @@ public class PlayerCameraController : MonoBehaviour
 
 				if (m_currentCameraPosition == CameraPosition.right) {
 					m_currentCameraPosition = CameraPosition.center;
-					this.transform.DOLocalMove (M_centerPos, 1f, true).OnComplete (OnTweenEnd);
+					this.transform.DOLocalMove (M_centerPos, 1f).OnComplete (OnTweenEnd);
 				} else if (m_currentCameraPosition == CameraPosition.center) {
 					m_currentCameraPosition = CameraPosition.left;
-					this.transform.DOLocalMove (M_leftPos, 1f, true).OnComplete (OnTweenEnd);
+					this.transform.DOLocalMove (M_leftPos, 1f).OnComplete (OnTweenEnd);
 				}
 			} else if (m_transitionValue <= -1f) {	//start transition to the right
 				m_transitionValue = 0f;
@@ -64,10 +64,10 @@ public class PlayerCameraController : MonoBehaviour
 
 				if (m_currentCameraPosition == CameraPosition.left) {
 					m_currentCameraPosition = CameraPosition.center;
-					this.transform.DOLocalMove (M_centerPos, 1f, true).OnComplete (OnTweenEnd);
+					this.transform.DOLocalMove (M_centerPos, 1f).OnComplete (OnTweenEnd);
 				} else if (m_currentCameraPosition == CameraPosition.center) {
 					m_currentCameraPosition = CameraPosition.right;
-					this.transform.DOLocalMove (M_rightPos, 1f, true).OnComplete (OnTweenEnd);
+					this.transform.DOLocalMove (M_rightPos, 1f).OnComplete (OnTweenEnd);
 				}
 			}
 		}

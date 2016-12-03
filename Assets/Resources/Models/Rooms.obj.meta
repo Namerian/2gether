@@ -1,0 +1,133 @@
+fileFormatVersion: 2
+guid: dd320bef8f35c7d4fa68f1e9e5308488
+timeCreated: 1480525255
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Double_Stone_Slab
+    100004: Moss_Stone
+    100006: Spruce_Wood_Stairs
+    100008: Stained_Clay
+    100010: Stained_Glass_Pane
+    100012: Stone
+    100014: Stone_Brick_Stairs
+    100016: Stone_Bricks
+    100018: Stone_Slab
+    100020: Wood
+    100022: Wood_Planks
+    100024: Wooden_Slab
+    400000: //RootNode
+    400002: Double_Stone_Slab
+    400004: Moss_Stone
+    400006: Spruce_Wood_Stairs
+    400008: Stained_Clay
+    400010: Stained_Glass_Pane
+    400012: Stone
+    400014: Stone_Brick_Stairs
+    400016: Stone_Bricks
+    400018: Stone_Slab
+    400020: Wood
+    400022: Wood_Planks
+    400024: Wooden_Slab
+    2300000: Double_Stone_Slab
+    2300002: Moss_Stone
+    2300004: Spruce_Wood_Stairs
+    2300006: Stained_Clay
+    2300008: Stained_Glass_Pane
+    2300010: Stone
+    2300012: Stone_Brick_Stairs
+    2300014: Stone_Bricks
+    2300016: Stone_Slab
+    2300018: Wood
+    2300020: Wood_Planks
+    2300022: Wooden_Slab
+    3300000: Double_Stone_Slab
+    3300002: Moss_Stone
+    3300004: Spruce_Wood_Stairs
+    3300006: Stained_Clay
+    3300008: Stained_Glass_Pane
+    3300010: Stone
+    3300012: Stone_Brick_Stairs
+    3300014: Stone_Bricks
+    3300016: Stone_Slab
+    3300018: Wood
+    3300020: Wood_Planks
+    3300022: Wooden_Slab
+    4300000: Double_Stone_Slab
+    4300002: Moss_Stone
+    4300004: Spruce_Wood_Stairs
+    4300006: Stained_Clay
+    4300008: Stained_Glass_Pane
+    4300010: Stone
+    4300012: Stone_Brick_Stairs
+    4300014: Stone_Bricks
+    4300016: Stone_Slab
+    4300018: Wood
+    4300020: Wood_Planks
+    4300022: Wooden_Slab
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

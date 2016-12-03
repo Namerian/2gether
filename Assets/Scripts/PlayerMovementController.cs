@@ -6,13 +6,15 @@ public class PlayerMovementController : MonoBehaviour
 	public float M_MovementSpeed = 1f;
 	public float M_RotationSpeed = 1f;
 
+    private Transform m_charTransform;
 	private CharacterController m_charController;
 
 	//==================================================================
 	// Use this for initialization
 	void Start ()
 	{
-		m_charController = this.GetComponent<CharacterController> ();
+        m_charTransform = this.transform;
+        m_charController = m_charTransform.GetComponent<CharacterController>();
 	}
 
 	//==================================================================
@@ -27,18 +29,18 @@ public class PlayerMovementController : MonoBehaviour
 		Vector3 movement = new Vector3 (horizontal, 0f, -vertical);		//creating a vector with the joystick values, x-axis for left/right and z-axis for forward/back
 		movement = this.transform.rotation * movement;					//rotating the movement vector in the direction the player is currently facing
 		movement.Normalize ();											
-		movement *= Time.deltaTime * M_MovementSpeed;					//multiplying the movement vector with the current deltaTime and the player speed
-		m_charController.Move (movement);								//the Move method of the CharacterController Component has a good collision detection
-
+		movement *= /*Time.deltaTime **/ M_MovementSpeed;                   //multiplying the movement vector with the current deltaTime and the player speed
+        //m_charController.Move (movement);								//the Move method of the CharacterController Component has a good collision detection
+        m_charController.SimpleMove(movement);
 
 		//**************************************************************
 		//Rotation
 		float rotation = Input.GetAxis ("Controller_1_4th_Axis");
         
 		if (rotation < 0f) {
-			this.transform.Rotate (this.transform.up, -1 * M_RotationSpeed * Time.deltaTime);
+			m_charTransform.Rotate (this.transform.up, -1 * M_RotationSpeed * Time.deltaTime);
 		} else if (rotation > 0f) {
-			this.transform.Rotate (this.transform.up, M_RotationSpeed * Time.deltaTime);
+			m_charTransform.Rotate (this.transform.up, M_RotationSpeed * Time.deltaTime);
 		}
 	}
 }
