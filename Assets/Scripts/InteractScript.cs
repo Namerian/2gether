@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-//README : Script a accrocher en enfant de la camera principale sur le joueur. Toutes les interractions avec l'environnement sont a tester a partir d'ici.
 public class InteractScript : MonoBehaviour {
 	public float interactDistance = 5;
 

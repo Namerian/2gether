@@ -12,14 +12,14 @@ public class DoorScript : InteractableScript {
 	*	Toggle l'ouverture d'une porte si elle n'est pas verrouillee
 	*	Ajouter 2 audio source en enfant de la porte. 1er : Ouverture et fermeture de la porte 2nd : feedback sonnore pour une porte fermee.
 	*	@player : le transform du player pour tester s'il possède la clef
-	*/
+	**/
 	public void ChangeDoorState() {
 		var audios = GetComponents<AudioSource>();
         if(audios.Length > 0)
         {
             var doorMovingSound = audios[0];
             //var doorLockedSound = audios[1];
-            if (!isLocked /*|| player.hasKey()*/) //
+            if (!isLocked /*|| player.hasKey()*/)
             {
                 isOpen = !isOpen;
                 doorMovingSound.Play();
