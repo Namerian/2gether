@@ -11,8 +11,8 @@ public class GameManager : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		m_victoryScreenCanvasGroup = this.transform.FindChild ("VictoryScreen").GetComponent<CanvasGroup> ();
-		m_defeatScreenCanvasGroup = this.transform.FindChild ("DefeatScreen").GetComponent<CanvasGroup> ();
+		m_victoryScreenCanvasGroup = this.transform.FindChild ("Canvas/VictoryScreen").GetComponent<CanvasGroup> ();
+		m_defeatScreenCanvasGroup = this.transform.FindChild ("Canvas/DefeatScreen").GetComponent<CanvasGroup> ();
 
 		IsGameRunning = true;
 	}
