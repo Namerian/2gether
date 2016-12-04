@@ -1,0 +1,38 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class GameManager : MonoBehaviour
+{
+	private CanvasGroup m_victoryScreenCanvasGroup;
+	private CanvasGroup m_defeatScreenCanvasGroup;
+
+	public bool IsGameRunning{ get; private set; }
+
+	// Use this for initialization
+	void Start ()
+	{
+		m_victoryScreenCanvasGroup = this.transform.FindChild ("VictoryScreen").GetComponent<CanvasGroup> ();
+		m_defeatScreenCanvasGroup = this.transform.FindChild ("DefeatScreen").GetComponent<CanvasGroup> ();
+
+		IsGameRunning = true;
+	}
+	
+	// Update is called once per frame
+	void Update ()
+	{
+		if (Input.GetKeyDown (KeyCode.Escape)) {
+			Application.Quit ();
+		}
+	}
+
+	public void OnDoorEvent (ImportantDoor.OpenDoorEvent openDoorEvent)
+	{
+		IsGameRunning = false;
+
+		if (openDoorEvent == ImportantDoor.OpenDoorEvent.Defeat) {
+			m_defeatScreenCanvasGroup.alpha = 1f;
+		} else if (openDoorEvent == ImportantDoor.OpenDoorEvent.Victory) {
+			m_victoryScreenCanvasGroup.alpha = 1f;
+		}
+	}
+}
