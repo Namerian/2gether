@@ -5,6 +5,7 @@ using DG.Tweening;
 public class PlayerCameraController : MonoBehaviour
 {
 	public float M_maxCameraAngle = 20f;
+	public float M_cameraRotationSpeed = 2f;
 
 	public Vector3 M_centerPos = new Vector3 (0f, 1.15f, -0.5f);
 	public Vector3 M_leftPos = new Vector3 (-0.5f, 1f, -0.25f);
@@ -19,21 +20,27 @@ public class PlayerCameraController : MonoBehaviour
 		right
 	}
 
-	private CameraPosition m_currentCameraPosition;
-	private bool m_isTransitionning;
-	private float m_transitionValue;
+	private Camera m_camera;
+
+	//private CameraPosition m_currentCameraPosition;
+	//private bool m_isTransitionning;
+	//private float m_transitionValue;
+
 	private Vector3 m_viewRotation;
 
 	//==================================================================
 	// Use this for initialization
 	void Start ()
 	{
-		m_currentCameraPosition = CameraPosition.center;
-		this.transform.localPosition = M_centerPos;
+		m_camera = this.GetComponent<Camera> ();
 
-		m_isTransitionning = false;
-		m_transitionValue = 0f;
-		m_viewRotation = new Vector3 ();
+		//m_currentCameraPosition = CameraPosition.center;
+		//this.transform.localPosition = M_centerPos;
+
+		//m_isTransitionning = false;
+		//m_transitionValue = 0f;
+
+		m_viewRotation = this.transform.localEulerAngles;
 	}
 
 	//==================================================================
@@ -41,8 +48,20 @@ public class PlayerCameraController : MonoBehaviour
 	void Update ()
 	{
 		//**************************************************************
+		//Rotation
+
+		m_viewRotation.x += -Input.GetAxis ("Mouse_Y") * M_cameraRotationSpeed * Time.deltaTime;
+		m_viewRotation.x = Mathf.Clamp (m_viewRotation.x, -M_maxCameraAngle, M_maxCameraAngle);
+
+		m_viewRotation.y += Input.GetAxis ("Mouse_X") * M_cameraRotationSpeed * Time.deltaTime;
+		m_viewRotation.y = Mathf.Clamp (m_viewRotation.y, -M_maxCameraAngle, M_maxCameraAngle);
+
+		transform.localEulerAngles = m_viewRotation;
+
+
+		//**************************************************************
 		//Movement
-		float movement = Input.GetAxis ("Controller_2_X_Axis");
+		/*float movement = Input.GetAxis ("Controller_2_X_Axis");
 		m_transitionValue += movement * Time.deltaTime;
 
 		if (!m_isTransitionning) {
@@ -70,24 +89,12 @@ public class PlayerCameraController : MonoBehaviour
 					this.transform.DOLocalMove (M_rightPos, 1f).OnComplete (OnTweenEnd);
 				}
 			}
-		}
-
-		//**************************************************************
-		//Rotation
-		//if (!m_isTransitionning) {
-		float horizontal = Input.GetAxis ("Controller_2_4th_Axis");
-		float vertical = Input.GetAxis ("Controller_2_5th_Axis");
-
-		m_viewRotation.y = Mathf.Clamp (m_viewRotation.y + horizontal, -M_maxCameraAngle, M_maxCameraAngle);
-		m_viewRotation.x = Mathf.Clamp (m_viewRotation.x + vertical, -M_maxCameraAngle, M_maxCameraAngle);
-
-		this.transform.localRotation = Quaternion.Euler (m_viewRotation);
-		//}
+		}*/
 	}
 
 	//==================================================================
-	void OnTweenEnd ()
+	/*void OnTweenEnd ()
 	{
 		m_isTransitionning = false;
-	}
+	}*/
 }
