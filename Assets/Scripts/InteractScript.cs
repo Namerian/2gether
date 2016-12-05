@@ -14,9 +14,35 @@ public class InteractScript : MonoBehaviour {
 			{
 				if(hit.collider.CompareTag("Interactable")) 
 				{
-					hit.collider.transform.parent.GetComponent<InteractableScript>().Interact();
+                    interactWith(hit.collider.gameObject);
+					//hit.collider.transform.parent.GetComponent<InteractableScript>().Interact();
 				}
 			}
 		}
 	}
+
+    void interactWith(GameObject obj)
+    {
+        GameObject o = obj;
+        var script = o.GetComponent<InteractableScript>();
+        if (script != null)
+        {
+            script.Interact();
+            return;
+        }
+
+        if (obj.transform.parent == null)
+            return;
+        o = obj.transform.parent.gameObject;
+
+        script = o.GetComponent<InteractableScript>();
+        if (script != null)
+        {
+            script.Interact();
+            return;
+        }
+        script = o.GetComponentInChildren<InteractableScript>();
+        if (script != null)
+            script.Interact();
+    }
 }
