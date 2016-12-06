@@ -8,25 +8,32 @@ public class DoorScript : InteractableScript
 	public float doorOpenAngle = 90f;
 	public float doorCloseAngle = 0;
 	public float doorOpeningSpeed = 2;
+	private GameManager _gameManager;
+
+	void Start() 
+	{
+		this._gameManager = G.Sys.gameManager;
+	}
 
 	/**
 	*	Toggle l'ouverture d'une porte si elle n'est pas verrouillee
 	*	Ajouter 2 audio source en enfant de la porte. 1er : Ouverture et fermeture de la porte 2nd : feedback sonnore pour une porte fermee.
 	*	@player : le transform du player pour tester s'il possède la clef
-	*/
+	**/
 	public virtual void ChangeDoorState ()
 	{
 		var audios = GetComponents<AudioSource> ();
 		if (audios.Length > 0) {
 			var doorMovingSound = audios [0];
-			//var doorLockedSound = audios[1];
-			if (!isLocked /*|| player.hasKey()*/) { //
+			var doorLockedSound = audios[1];
+			if (!isLocked || _gameManager.playerHasKey) {
 				isOpen = !isOpen;
 				doorMovingSound.Play ();
 			} else {
-				//doorLockedSound.Play();
+				doorLockedSound.Play();
 			}
 		}
+
 	}
 
 	public override void Interact ()

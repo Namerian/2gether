@@ -5,7 +5,7 @@ public class GameManager : MonoBehaviour
 {
 	private CanvasGroup m_victoryScreenCanvasGroup;
 	private CanvasGroup m_defeatScreenCanvasGroup;
-
+	public bool playerHasKey = false;
 	public bool IsGameRunning{ get; private set; }
 
 	// Use this for initialization

@@ -4,19 +4,19 @@ using System;
 
 public class KeyScript : InteractableScript
 {
+    private GameManager _gameManager;
 
-    public override void Interact()
-    {
-        throw new NotImplementedException();
-    }
     
     void Start ()
     {
-	
+       this._gameManager = G.Sys.gameManager;
 	}
-	
-	void Update ()
+
+    public override void Interact()
     {
-	
-	}
+        if(_gameManager != null) {
+            _gameManager.playerHasKey = true;
+        }
+        Destroy(gameObject);
+    }
 }
