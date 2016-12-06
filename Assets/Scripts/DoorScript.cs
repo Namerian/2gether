@@ -26,7 +26,7 @@ public class DoorScript : InteractableScript
 
         var audios = GetComponents<AudioSource>();
 
-        if (!isLocked || _gameManager.playerHasKey)
+        if (!isLocked || G.Sys.gameManager.playerHasKey)
         {
             isOpen = !isOpen;
             if (audios.Length > 0)
