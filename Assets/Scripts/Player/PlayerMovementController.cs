@@ -5,6 +5,7 @@ public class PlayerMovementController : MonoBehaviour
 {
 	public float M_MovementSpeed = 1f;
 	public float M_RotationSpeed = 1f;
+    public float M_TimerSpeed = 0.5f;
 
     public AudioClip[] M_footsteps;
 
@@ -13,6 +14,7 @@ public class PlayerMovementController : MonoBehaviour
 	private Transform m_charTransform;
 	private CharacterController m_charController;
     private AudioSource m_audioSource;
+    private float m_timerValue = 0;
 
 	//==================================================================
 	// Use this for initialization
@@ -45,11 +47,18 @@ public class PlayerMovementController : MonoBehaviour
 		//m_charController.Move (movement);								//the Move method of the CharacterController Component has a good collision detection
 		m_charController.SimpleMove (movement);
 
-        if(position != this.transform.position && !m_audioSource.isPlaying)
+        if (position != this.transform.position)
         {
-            m_audioSource.clip = M_footsteps[Random.Range(0, M_footsteps.Length)];
-            m_audioSource.Play();
+            m_timerValue -= Time.deltaTime;
+            if (m_timerValue <= 0)
+            {
+                m_audioSource.clip = M_footsteps[Random.Range(0, M_footsteps.Length)];
+                m_audioSource.Play();
+                m_timerValue = M_TimerSpeed;
+            }
+
         }
+        else m_timerValue = 0;
 
 		//**************************************************************
 		//Rotation
