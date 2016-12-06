@@ -6,10 +6,13 @@ public class PlayerMovementController : MonoBehaviour
 	public float M_MovementSpeed = 1f;
 	public float M_RotationSpeed = 1f;
 
+    public AudioClip[] M_footsteps;
+
 	private GameManager m_gameManager;
 
 	private Transform m_charTransform;
 	private CharacterController m_charController;
+    private AudioSource m_audioSource;
 
 	//==================================================================
 	// Use this for initialization
@@ -17,7 +20,8 @@ public class PlayerMovementController : MonoBehaviour
 	{
 		m_gameManager = GameObject.Find ("GameManager").GetComponent<GameManager> ();
 		m_charTransform = this.transform;
-		m_charController = m_charTransform.GetComponent<CharacterController> ();
+		m_charController = GetComponent<CharacterController> ();
+        m_audioSource = GetComponent<AudioSource>();
 	}
 
 	//==================================================================
@@ -28,8 +32,9 @@ public class PlayerMovementController : MonoBehaviour
 			return;
 		}
 
-		//**************************************************************
-		//Movement
+        //**************************************************************
+        //Movement
+        Vector3 position = this.transform.position;
 		float horizontal = Input.GetAxis ("Controller_1_X_Axis");
 		float vertical = Input.GetAxis ("Controller_1_Y_Axis");
 
@@ -39,6 +44,12 @@ public class PlayerMovementController : MonoBehaviour
 		movement *= /*Time.deltaTime **/ M_MovementSpeed;                   //multiplying the movement vector with the current deltaTime and the player speed
 		//m_charController.Move (movement);								//the Move method of the CharacterController Component has a good collision detection
 		m_charController.SimpleMove (movement);
+
+        if(position != this.transform.position && !m_audioSource.isPlaying)
+        {
+            m_audioSource.clip = M_footsteps[Random.Range(0, M_footsteps.Length)];
+            m_audioSource.Play();
+        }
 
 		//**************************************************************
 		//Rotation
