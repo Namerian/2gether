@@ -32,7 +32,9 @@ public class PlayerCameraController : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		m_camera = this.GetComponent<Camera> ();
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        m_camera = this.GetComponent<Camera> ();
 
 		//m_currentCameraPosition = CameraPosition.center;
 		//this.transform.localPosition = M_centerPos;
