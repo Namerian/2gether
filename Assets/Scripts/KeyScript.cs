@@ -14,6 +14,8 @@ public class KeyScript : InteractableScript
 
     public override void Interact()
     {
+        Debug.Log("KeyScript: Interact: called");
+
         if(_gameManager != null) {
             _gameManager.playerHasKey = true;
         }

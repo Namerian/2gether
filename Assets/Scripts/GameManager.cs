@@ -8,6 +8,12 @@ public class GameManager : MonoBehaviour
 	public bool playerHasKey = false;
 	public bool IsGameRunning{ get; private set; }
 
+    //
+    void Awake()
+    {
+        G.Sys.gameManager = this;
+    }
+
 	// Use this for initialization
 	void Start ()
 	{
