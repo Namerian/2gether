@@ -21,6 +21,8 @@ public class ImportantDoor : DoorScript
 
 	public override void ChangeDoorState ()
 	{
+        Debug.Log("ImportantDoor: ChangeDoorState: called");
+
 		bool wasDoorOpen = base.isOpen;
 
 		base.ChangeDoorState ();
