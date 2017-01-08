@@ -37,5 +37,7 @@ public class SafeDoorBehaviour : InteractableScript
 			_audioSourceComponent.clip = _soundOpening;
 			_audioSourceComponent.Play ();
 		}
+
+		_isOpen = true;
 	}
 }

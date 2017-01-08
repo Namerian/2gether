@@ -29,7 +29,11 @@ public class SafeLockBehaviour : InteractableScript
 
 	public override void Interact ()
 	{
-		Debug.Log ("SafeLockBehaviour:Interact:called!");
+		//Debug.Log ("SafeLockBehaviour:Interact:called!");
+
+		if (!_isLocked) {
+			return;
+		}
 
 		/*Ray ray = new Ray (Camera.main.transform.position, Camera.main.transform.forward);
 		RaycastHit hit;
@@ -53,7 +57,7 @@ public class SafeLockBehaviour : InteractableScript
 
 		if (correctPosition && _isLocked) {
 			_isLocked = false;
-			Debug.Log ("SafeLockBehaviour:Interact:safe unlocked!");
+			//Debug.Log ("SafeLockBehaviour:Interact:safe unlocked!");
 		}
 
 		//play feedback sound
