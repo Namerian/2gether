@@ -9,36 +9,39 @@ public class ImportantDoor : DoorScript
 		Defeat
 	}
 
-	public OpenDoorEvent M_onOpenDoor;
+	public OpenDoorEvent _onOpenDoor;
 
-	private GameManager m_gameManager;
-    private AudioSource m_audio = null;
+	private GameManager _gameManager;
+	//private AudioSource _audio = null;
 
 	// Use this for initialization
 	void Start ()
 	{
-		m_gameManager = GameObject.Find ("GameManager").GetComponent<GameManager> ();
-        var audios =  GetComponents<AudioSource>();
-        if (audios.Length > 2)
-            m_audio = audios[2];
+		_gameManager = GameObject.Find ("GameManager").GetComponent<GameManager> ();
+		/*var audios = GetComponents<AudioSource> ();
+		if (audios.Length > 2)
+			_audio = audios [2];*/
 	}
 
-	public override void ChangeDoorState ()
+	public override void Interact ()
 	{
-        Debug.Log("ImportantDoor: ChangeDoorState: called");
+		//Debug.Log ("ImportantDoor: ChangeDoorState: called");
 
-		bool wasDoorOpen = base.isOpen;
+		bool wasDoorOpen = base._isOpen;
 
-		base.ChangeDoorState ();
-        if(m_audio != null)
-            m_audio.Play();
-		if (!wasDoorOpen && base.isOpen) {
-			switch (M_onOpenDoor) {
+		base.Interact ();
+
+		/*if (_audio != null) {
+			_audio.Play ();
+		}*/
+		
+		if (!wasDoorOpen && base._isOpen) {
+			switch (_onOpenDoor) {
 			case OpenDoorEvent.Defeat:
-				m_gameManager.OnDoorEvent (M_onOpenDoor);
+				_gameManager.OnDoorEvent (_onOpenDoor);
 				break;
 			case OpenDoorEvent.Victory:
-				m_gameManager.OnDoorEvent (M_onOpenDoor);
+				_gameManager.OnDoorEvent (_onOpenDoor);
 				break;
 			}
 		}

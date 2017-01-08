@@ -4,34 +4,42 @@ using DG.Tweening;
 
 public class SafeLockBehaviour : InteractableScript
 {
-	private const float _TURN_ANGLE = 60.0f;
+	public int _numOfPositions = 6;
+	public int _key = 4;
+	public int _startingPosition = 0;
 
-	public int _combination = 1;
-	public int[] _positions = { 0, 1, 2, 3, 4, 5 };
 	public AudioClip _soundHit = null;
 	public AudioClip _soundMiss = null;
 
-	private int _currentPositionIndex = 0;
 	private AudioSource _audioSourceComponent = null;
+
+	private float _turnAngle = 0;
+	private int _currentPosition = 0;
 	private bool _isLocked = true;
+	private bool _isTurning = false;
+
+	//=======================================================
+
+	void OnValidate ()
+	{
+		_numOfPositions = Mathf.Clamp (_numOfPositions, 0, 9);
+		_key = Mathf.Clamp (_key, 0, _numOfPositions);
+	}
 
 	// Use this for initialization
 	void Start ()
 	{
 		_audioSourceComponent = GetComponent<AudioSource> ();
-	}
-	
-	// Update is called once per frame
-	void Update ()
-	{
-	
+
+		_turnAngle = 360 / _numOfPositions;
+		_currentPosition = _startingPosition;
 	}
 
 	public override void Interact ()
 	{
 		//Debug.Log ("SafeLockBehaviour:Interact:called!");
 
-		if (!_isLocked) {
+		if (!_isLocked || _isTurning) {
 			return;
 		}
 
@@ -47,13 +55,13 @@ public class SafeLockBehaviour : InteractableScript
 		}*/
 
 		//update current position
-		_currentPositionIndex += 1;
+		_currentPosition++;
 
-		if (_currentPositionIndex == _positions.Length) {
-			_currentPositionIndex = 0;
+		if (_currentPosition == _numOfPositions) {
+			_currentPosition = 0;
 		}
 
-		bool correctPosition = (_positions [_currentPositionIndex] == _combination);
+		bool correctPosition = (_currentPosition == _key);
 
 		if (correctPosition && _isLocked) {
 			_isLocked = false;
@@ -71,12 +79,18 @@ public class SafeLockBehaviour : InteractableScript
 
 		//rotate button
 		Vector3 localAngles = this.transform.localEulerAngles;
-		localAngles.x -= _TURN_ANGLE;
-		this.transform.DOLocalRotate (localAngles, 0.5f);
+		localAngles.x -= _turnAngle;
+		this.transform.DOLocalRotate (localAngles, 0.5f).OnComplete (TweenComplete);
+		_isTurning = true;
 	}
 
 	public bool GetIsLocked ()
 	{
 		return _isLocked;
+	}
+
+	private void TweenComplete ()
+	{
+		_isTurning = false;
 	}
 }
