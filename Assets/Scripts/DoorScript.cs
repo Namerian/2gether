@@ -36,16 +36,12 @@ public class DoorScript : InteractableScript
 			return;
 		}
 
-		//var audios = GetComponents<AudioSource> ();
-
 		if (!isOpen) {
 			if (!isLocked) {
-				isOpen = true;
 				MoveDoor ();
 			} else if (isLocked && G.Sys.gameManager.playerHasKey) {
-				isOpen = true;
-				G.Sys.gameManager.playerHasKey = false;
 				MoveDoor ();
+				G.Sys.gameManager.playerHasKey = false;
 			} else {
 				if (_soundLocked != null) {
 					_audioSourceComponent.clip = _soundLocked;
@@ -53,25 +49,8 @@ public class DoorScript : InteractableScript
 				}
 			}
 		} else {
-			isOpen = false;
 			MoveDoor ();
 		}
-
-		/*if (!isLocked || G.Sys.gameManager.playerHasKey)
-        {
-            isOpen = !isOpen;
-            if (audios.Length > 0)
-            {
-                audios[0].Play();
-            }
-        }
-        else
-        {
-            if (audios.Length > 1)
-            {
-                audios[1].Play();
-            }
-        }*/
 	}
 
 	public override void Interact ()
@@ -101,8 +80,10 @@ public class DoorScript : InteractableScript
 
 		Vector3 target = this.transform.localEulerAngles;
 		if (isOpen) {
+			isOpen = false;
 			target = new Vector3 (0, doorCloseAngle, 0);
 		} else if (!isOpen) {
+			isOpen = true;
 			target = new Vector3 (0, doorOpenAngle, 0);
 		}
 
