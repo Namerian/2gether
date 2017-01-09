@@ -34,17 +34,17 @@ public class SafeLockBehaviour : InteractableScript
 		_turnAngle = 360 / _numOfPositions;
 		_currentPosition = _startingPosition;
 
-        if(_key == _startingPosition)
+        /*if(_key == _startingPosition)
         {
             _isLocked = false;
-        }
+        }*/
 	}
 
 	public override void Interact ()
 	{
 		//Debug.Log ("SafeLockBehaviour:Interact:called!");
 
-		if (!_isLocked || _isTurning) {
+		if (/*!_isLocked ||*/ _isTurning) {
 			return;
 		}
 
@@ -68,10 +68,10 @@ public class SafeLockBehaviour : InteractableScript
 
 		bool correctPosition = (_currentPosition == _key);
 
-		if (correctPosition && _isLocked) {
+		/*if (correctPosition && _isLocked) {
 			_isLocked = false;
 			//Debug.Log ("SafeLockBehaviour:Interact:safe unlocked!");
-		}
+		}*/
 
 		//play feedback sound
 		if (correctPosition && _soundHit != null) {
@@ -91,7 +91,8 @@ public class SafeLockBehaviour : InteractableScript
 
 	public bool GetIsLocked ()
 	{
-		return _isLocked;
+        //return _isLocked;
+        return _currentPosition != _key;
 	}
 
 	private void TweenComplete ()
