@@ -26,7 +26,7 @@ public class DoorScript : InteractableScript
 	{
 		//Debug.Log ("DoorScript: Interact: called");
 
-		if (_isMoving) {
+		if (_isMoving || !_canBeOpened) {
 			return;
 		}
 
