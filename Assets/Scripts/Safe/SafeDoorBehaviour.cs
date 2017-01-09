@@ -9,6 +9,7 @@ public class SafeDoorBehaviour : InteractableScript
 	private SafeLockBehaviour _lock = null;
 	private bool _isOpen = false;
 	private AudioSource _audioSourceComponent = null;
+    private bool _isMoving = false;
 
 	// Use this for initialization
 	void Start ()
@@ -25,19 +26,44 @@ public class SafeDoorBehaviour : InteractableScript
 
 	public override void Interact ()
 	{
-		if (_lock.GetIsLocked () || _isOpen) {
+		if (_lock.GetIsLocked () || _isMoving) {
 			return;
 		}
 
-		Vector3 localRotation = this.transform.localEulerAngles;
-		localRotation.y -= 90f;
-		this.transform.DOLocalRotate (localRotation, 3);
+        if (_isOpen)
+        {
+            Vector3 localRotation = this.transform.localEulerAngles;
+            localRotation.y -= 90f;
+            this.transform.DOLocalRotate(localRotation, 3).OnComplete(OnTweenComplete);
 
-		if (_soundOpening != null) {
-			_audioSourceComponent.clip = _soundOpening;
-			_audioSourceComponent.Play ();
-		}
+            if (_soundOpening != null)
+            {
+                _audioSourceComponent.clip = _soundOpening;
+                _audioSourceComponent.Play();
+            }
 
-		_isOpen = true;
+            _isOpen = false;
+            _isMoving = true;
+        }
+        else
+        {
+            Vector3 localRotation = this.transform.localEulerAngles;
+            localRotation.y += 90f;
+            this.transform.DOLocalRotate(localRotation, 3).OnComplete(OnTweenComplete);
+
+            if (_soundOpening != null)
+            {
+                _audioSourceComponent.clip = _soundOpening;
+                _audioSourceComponent.Play();
+            }
+
+            _isOpen = true;
+            _isMoving = true;
+        }
 	}
+
+    private void OnTweenComplete()
+    {
+        _isMoving = false;
+    }
 }

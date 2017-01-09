@@ -33,6 +33,11 @@ public class SafeLockBehaviour : InteractableScript
 
 		_turnAngle = 360 / _numOfPositions;
 		_currentPosition = _startingPosition;
+
+        if(_key == _startingPosition)
+        {
+            _isLocked = false;
+        }
 	}
 
 	public override void Interact ()
@@ -79,7 +84,7 @@ public class SafeLockBehaviour : InteractableScript
 
 		//rotate button
 		Vector3 localAngles = this.transform.localEulerAngles;
-		localAngles.x -= _turnAngle;
+		localAngles.z += _turnAngle;
 		this.transform.DOLocalRotate (localAngles, 0.5f).OnComplete (TweenComplete);
 		_isTurning = true;
 	}
