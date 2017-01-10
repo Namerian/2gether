@@ -26,12 +26,18 @@ public class DoorScript : InteractableScript
 	{
 		//Debug.Log ("DoorScript: Interact: called");
 
+        if(_isMoving || !_canBeOpened)
+        {
+            return;
+        }
+
 		if (!_isOpen) {
 			if (!_isLocked) {
 				MoveDoor ();
 			} else if (_isLocked && G.Sys.gameManager.playerHasKey && _canBeOpened) {
 				MoveDoor ();
 				G.Sys.gameManager.playerHasKey = false;
+                _isLocked = false;
 			} else {
 				if (_soundLocked != null) {
 					_audioSourceComponent.clip = _soundLocked;
