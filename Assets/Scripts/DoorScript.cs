@@ -26,13 +26,13 @@ public class DoorScript : InteractableScript
 	{
 		//Debug.Log ("DoorScript: Interact: called");
 
-        if(_isMoving || !_canBeOpened)
+        if(_isMoving)
         {
             return;
         }
 
 		if (!_isOpen) {
-			if (!_isLocked) {
+			if (!_isLocked && _canBeOpened) {
 				MoveDoor ();
 			} else if (_isLocked && G.Sys.gameManager.playerHasKey && _canBeOpened) {
 				MoveDoor ();

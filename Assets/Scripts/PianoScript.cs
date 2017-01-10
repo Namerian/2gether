@@ -4,14 +4,21 @@ using System.Collections.Generic;
 
 public class PianoScript : MonoBehaviour {
 	public List<int> notesSuite;
+    public List<GameObject> doors;
 	List<int> currentNotes = new List<int>();
+    AudioSource unlockSource;
+
+    void Start()
+    {
+        unlockSource = GetComponent<AudioSource>();
+    }
 
 	public void addNote(int noteId) {
 		currentNotes.Add(noteId);
 		if(this.isSequenceValid()) {
 			if(notesSuite.Count == currentNotes.Count) {
-				//Do something : challenge solved
-				Debug.Log("Sequence Achieved");
+                //Do something : challenge solved
+                openDoors();
 				currentNotes.Clear();
 			}
 		} else {
@@ -28,4 +35,20 @@ public class PianoScript : MonoBehaviour {
 		}
 		return sequenceValidity;
 	}
+
+    void openDoors()
+    {
+        unlockSource.Play();
+
+        foreach(var door in doors)
+        {
+            var script = door.GetComponent<DoorScript>();
+            if (script == null)
+                continue;
+            script._canBeOpened = true;
+            script._isLocked = false;
+            if(!script._isOpen)
+                script.Interact();
+        }
+    }
 }
